@@ -1,12 +1,12 @@
-// To create store import createStore from redux
-// createStore takes parameters   reducers, middleware, initialstate
-import { createStore } from "redux";
-// import reducers
-import reducers from "./reducers/index";
-
-const store = createStore(
-  reducers,
-  {},
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+import { configureStore } from "@reduxjs/toolkit";
+import ShopSlice from "./Slices/ShopSlice";
+import AddToCartSlice from "./Slices/AddToCartSlice";
+import productdetailReducer from "./Slices/ProductDetail";
+const store = configureStore({
+  reducer: {
+    shopstore: ShopSlice,
+    AddToCart: AddToCartSlice,
+    ProductDetail: productdetailReducer,
+  },
+});
 export default store;

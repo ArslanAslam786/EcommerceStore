@@ -1,21 +1,29 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductListing from "./components/ProductListing";
-import ProductDetail from "./components/ProductDetail";
 import Navbar from "./components/Navbar";
+import ProductDetail from "./components/ProductDetail";
+import CartListing from "./components/CartListing";
+import { Box } from "@mui/material";
 
 const App = () => {
   return (
     <>
-      <Router>
-        <Navbar />
+      <Box sx={{ bgcolor: "#dae8ed" }}>
+        <Router>
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<ProductListing />} />
-          <Route path="/product/:productId" element={<ProductDetail />} />
-          <Route>Page not fond</Route>
-        </Routes>
-      </Router>
+          <Routes>
+            <Route path="/" element={<ProductListing />} />
+            {/* <Route path="/productdetail" element={<ProductDetail />} /> */}
+            <Route path="/cartlisting" element={<CartListing />} />
+            <Route path="/productdetail" element={<ProductDetail />} />
+
+            <Route>Page not fond</Route>
+          </Routes>
+        </Router>
+        {/* <ProductListing /> */}
+      </Box>
     </>
   );
 };

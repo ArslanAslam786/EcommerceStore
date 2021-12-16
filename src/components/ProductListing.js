@@ -1,31 +1,28 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Box } from "@mui/material";
-import { useSelector } from "react-redux";
-import ProductComponent from "./ProductComponent";
-import { setProducts } from "../Redux/actions/ProductActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addproduct } from "../Redux/Slices/ShopSlice";
+import ProductDispaly from "./ProductDispaly";
 
 const ProductListing = () => {
-  const products = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
-  const fetchProducts = async () => {
+  const fetchproducts = async () => {
     const response = await axios
       .get("https://fakestoreapi.com/products")
       .catch((err) => {
         console.log("error", err);
       });
-    dispatch(setProducts(response.data));
+    console.log(response.data);
+
+    dispatch(addproduct(response.data));
   };
   useEffect(() => {
-    fetchProducts();
+    fetchproducts();
   }, []);
-  // console.log(products);
   return (
     <>
-      <Box>
-        <ProductComponent />
-      </Box>
+      <ProductDispaly />
     </>
   );
 };
