@@ -35,14 +35,17 @@ const CartListing = () => {
   const handleClearCart = () => {
     dispatch(ClearCart());
   };
-  const cart = useSelector((state) => state.AddToCart);
-  const Items = useSelector((state) => state.AddToCart.CartItems);
-  const ItemQuantity = useSelector((state) => state.AddToCart.AddItems);
-  const TotalQuantity = useSelector((state) => state.totalQuantity);
-  console.log(TotalQuantity);
+  const cart = useSelector((state) => state.Cart);
+  const Items = useSelector((state) => state.Cart.CartItems);
+  const ItemQuantity = useSelector((state) => state.Cart.AddItems);
+  const total = useSelector((state) => state.Cart.totalQuantity);
+  console.log("TotalQuantity", total);
   useEffect(() => {
     dispatch(totalQuantity());
-  });
+  }, [cart, dispatch]);
+
+  const totalPrice = useSelector((state) => state.Cart.TotalPrice);
+  const TotalQuantity = useSelector((state) => state.Cart.TotalQuantity);
 
   return (
     <>
@@ -97,7 +100,7 @@ const CartListing = () => {
                 }}
               >
                 {Items?.map((product) => {
-                  const { id, price, image, category } = product;
+                  const { id, price, image, category, Quantity } = product;
                   return (
                     <Grid item key={id}>
                       <Card
@@ -144,6 +147,12 @@ const CartListing = () => {
                               -
                             </Button>
                           </Box>
+                          <Typography variant="h6" textAlign="center">
+                            Total Price
+                          </Typography>
+                          <Typography variant="h6" textAlign="center">
+                            {price * Quantity}
+                          </Typography>
                         </CardContent>
                         <CardActions style={{ justifyContent: "center" }}>
                           <Button
@@ -160,6 +169,11 @@ const CartListing = () => {
                   );
                 })}
               </Grid>
+              <Box style={{ marginTop: "30px" }}>
+                <Typography variant="h6" textAlign="center">
+                  Total Amount: {totalPrice}
+                </Typography>
+              </Box>
             </Box>
             <Button onClick={() => handleClearCart()}>Clear Cart</Button>
           </>

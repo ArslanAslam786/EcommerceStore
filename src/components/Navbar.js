@@ -12,11 +12,11 @@ const Navbar = () => {
   const handleClick = () => {
     navigation("/cartlisting");
   };
-  const TotalQuantity = useSelector((state) => state.totalQuantity);
-
-  console.log(TotalQuantity);
-  // const dispatch = useDispatch();
-  // dispatch(totalQuantity());
+  const cart = useSelector((state) => state.Cart.CartItems);
+  const Total = useSelector((state) => state.Cart.TotalQuantity);
+  console.log("TotalQuantity", Total);
+  const dispatch = useDispatch();
+  dispatch(totalQuantity());
 
   return (
     <>
@@ -41,7 +41,8 @@ const Navbar = () => {
               sx={{ color: "white", fontSize: "46px" }}
             />
           </IconButton>
-          <Typography sx={{ color: "white" }}> {totalQuantity}</Typography>
+          {/* <Typography sx={{ color: "white" }}>{cart.length} </Typography> */}
+          <Typography sx={{ color: "white" }}>{Total}</Typography>
         </Toolbar>
       </Box>
     </>
