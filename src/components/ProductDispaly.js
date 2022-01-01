@@ -5,72 +5,87 @@ import {
   Card,
   CardMedia,
   CardContent,
-  ListItem,
-  List,
   Typography,
   Grid,
   CardActions,
   Button,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import { AddToCart } from "../Redux/Slices/AddToCartSlice";
 
 const ProductDispaly = () => {
   const products = useSelector((state) => state.shopstore.products);
   const dispatch = useDispatch();
   const handleAddToCart = (product) => {
-    console.log(product);
+    // console.log(product);
     dispatch(AddToCart(product));
   };
 
   return (
     <>
-      <Box>
+      <Box mt={"80px"}>
         <Grid
           container
           sx={{
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
-            gap: "5px",
+            justifyContent: "space-around",
+            gap: "15px",
           }}
         >
           {products.map((product) => {
-            const { id, price, image, title, description } = product;
+            const { id, price, image, category } = product;
             return (
-              <Grid item lg={4} xl={3} md={4} sm={12} xs={12} key={id}>
-                <Link to="/productdetail">
-                  <Card
+              <Grid item key={id}>
+                <Card
+                  sx={{
+                    maxHeight: "290px",
+                    maxWidth: "200px",
+                    minWidth: "200px",
+                    // minHeight: "270px",
+                    marginRight: "0px",
+                    // color: "white",
+                    // bgcolor: "#9d9da3",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={image}
                     sx={{
-                      maxHeight: "300px",
-                      maxWidth: "200px",
-                      minHeight: "300px",
-                      marginRight: "0px",
+                      height: "100px",
+                      width: "100p%",
+                      objectFit: "contain",
+                      marginTop: "15px",
+                    }}
+                  />
+                  <CardContent>
+                    <Typography variant="h6" textAlign="center">
+                      {category}
+                    </Typography>
+
+                    <Typography variant="h6" textAlign="center">
+                      $ {price}
+                    </Typography>
+                  </CardContent>
+
+                  <CardActions
+                    // disableSpacing
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
                     }}
                   >
-                    <CardMedia
-                      component="img"
-                      image={image}
-                      sx={{
-                        height: "100px",
-                        width: "100px",
-                        objectFit: "contain",
-                      }}
-                    />
-                    <CardContent>
-                      <Typography>{title}</Typography>
-                      <Typography>$ {price}</Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        variant="contained"
-                        onClick={() => handleAddToCart(product)}
-                      >
-                        Add to Cart
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Link>
+                    <Button
+                      color="secondary"
+                      size="large"
+                      variant="contained"
+                      onClick={() => handleAddToCart(product)}
+                      sx={{ flex: 1 }}
+                    >
+                      Add To Cart
+                    </Button>
+                  </CardActions>
+                </Card>
               </Grid>
             );
           })}

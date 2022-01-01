@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   CartItems: [],
-  Quantity: 0,
+  TotalQuantity: 0,
+  TotalAmount: 0,
 };
 
 const AddToCartSlice = createSlice({
@@ -19,7 +20,45 @@ const AddToCartSlice = createSlice({
         state.CartItems.push(temproduct);
       }
     },
+
+    RemoveToCart: (state, action) => {
+      const id = action.payload.id;
+      const remaining = state.CartItems.filter((product) => product.id !== id);
+      console.log(remaining);
+      state.CartItems = remaining;
+      // return remaining;
+    },
+    decreaseCart: (state, action) => {
+      const itemindex = state.CartItems.findIndex(
+        (item) => item.id === action.payload.id,
+      );
+      if (state.CartItems[itemindex].Quantity > 1) {
+        state.CartItems[itemindex].Quantity -= 1;
+      } else if (state.CartItems[itemindex].Quantity === 1) {
+        const nextCartItems = state.CartItems.filter(
+          (item) => item.id !== action.payload.id,
+        );
+        state.CartItems = nextCartItems;
+      }
+    },
+    ClearCart: (state, action) => {
+      state.CartItems = [];
+    },
+    totalQuantity: (state, action) => {
+      let initialvalue = 0;
+      let sum = state.CartItems.reduce((total, elm) => {
+        return total + elm.Quantity;
+      }, initialvalue);
+      state.TotalQuantity = sum;
+    },
   },
 });
-export const { AddToCart } = AddToCartSlice.actions;
+export const {
+  AddToCart,
+  RemoveToCart,
+
+  decreaseCart,
+  ClearCart,
+  totalQuantity,
+} = AddToCartSlice.actions;
 export default AddToCartSlice.reducer;

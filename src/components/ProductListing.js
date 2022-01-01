@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addproduct } from "../Redux/Slices/ShopSlice";
 import ProductDispaly from "./ProductDispaly";
 
@@ -13,16 +13,18 @@ const ProductListing = () => {
       .catch((err) => {
         console.log("error", err);
       });
-    console.log(response.data);
+    // console.log(response.data);
 
     dispatch(addproduct(response.data));
   };
   useEffect(() => {
     fetchproducts();
-  }, []);
+  });
   return (
     <>
-      <ProductDispaly />
+      <Box sx={{ marginTop: "15px" }}>
+        <ProductDispaly />
+      </Box>
     </>
   );
 };
