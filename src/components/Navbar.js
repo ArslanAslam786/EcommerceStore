@@ -36,9 +36,12 @@ const Navbar = () => {
               <Box sx={{ color: "white", fontSize: "3.5vh" }}>Online Shop</Box>
             </NavLink>
           </Box>
-          {/* <Box sx={{ color: "white", fontSize: "12px", flex: 1 }}>
-            Happy Shopping
-          </Box> */}
+          <Box flex=".1">
+            <NavLink to="/login" style={{ textDecoration: "none" }}>
+              <Box sx={{ color: "white", fontSize: "3.5vh" }}>Login</Box>
+            </NavLink>
+          </Box>
+
           <IconButton onClick={handleClick}>
             <ShoppingCartTwoToneIcon
               sx={{ color: "white", fontSize: "46px" }}
