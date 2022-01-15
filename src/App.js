@@ -7,26 +7,24 @@ import CartListing from "./components/CartListing";
 import { Box } from "@mui/material";
 import AppStyle from "./App.css";
 import LoginForm from "./Auth/LoginForm";
+import GlobalStyles from "./theme/globalStyles";
 
 const App = () => {
   return (
     <>
-      <Box
-      // sx={{ bgcolor: "#fff6e3" }}
-      >
-        <Router>
-          <Navbar />
+      <GlobalStyles />
+      <Router>
+        <Navbar />
 
-          <Routes>
-            <Route path="/" element={<ProductListing />} />
-            <Route path="/cartlisting" element={<CartListing />} />
-            <Route path="/productdetail" element={<ProductDetail />} />
-            <Route path="/login" element={<LoginForm />} />
+        <Routes>
+          <Route path="/" element={<ProductListing />} />
+          <Route path="/cartlisting" element={<CartListing />} />
+          <Route path="/productdetail" element={<ProductDetail />} />
+          <Route path="/login" element={<LoginForm />} />
 
-            <Route>Page not fond</Route>
-          </Routes>
-        </Router>
-      </Box>
+          <Route>Page not fond</Route>
+        </Routes>
+      </Router>
     </>
   );
 };

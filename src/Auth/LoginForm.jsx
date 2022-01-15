@@ -38,34 +38,28 @@ const LoginForm = () => {
     <>
       <Box
         component="section"
-        // sx={{
-        //   backgroundImage: `url(${image})`,
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundSize: "cover",
-        //   width: "100%",
-        //   height: "100%",
-        // }}
+        sx={{
+          backgroundImage: `url(${images})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          // backgroundOrigin: "content-box",
+          width: "100vw",
+          height: "100vh",
+        }}
       >
         <Box
-          mt={"100px"}
+          mt={"60px"}
           textAlign={"center"}
           display={"flex"}
           flexDirection={"column"}
           justifyContent={"center"}
           alignItems={"center"}
-          sx={{
-            backgroundImage: `url(${images})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            // width: "100%",
-            // height: "100%",
-            margin: "100px 50px 0 50px",
-          }}
         >
           <Box>
             <Typography
               variant="h6"
-              mb={"25px"}
+              mb={"15px"}
+              mt={"20px"}
               sx={{ fontFamily: "sans-serif", fontSize: "2rem" }}
             >
               Login
@@ -97,8 +91,9 @@ const LoginForm = () => {
                 label="First Name"
                 name="FirstName"
                 variant="outlined"
-                value={user.FirstName}
                 size="small"
+                color="primary"
+                value={user.FirstName}
                 onChange={handleChange}
               />
               <TextField
